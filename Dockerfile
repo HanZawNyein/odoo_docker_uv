@@ -18,12 +18,14 @@ ENV PATH="/root/.local/bin/:$PATH"
 
 # Install dependencies system-wide
 ENV UV_SYSTEM_PYTHON=1
+ENV UV_COMPILE_BYTECODE=1
 
 # Set working directory
 WORKDIR /opt/odoo
 
 COPY ./pyproject.toml /opt/odoo/pyproject.toml
 RUN uv pip install -r pyproject.toml --break-system-packages
+#RUN uv sync --compile-bytecode
 
 # Change to Odoo user
 USER odoo
